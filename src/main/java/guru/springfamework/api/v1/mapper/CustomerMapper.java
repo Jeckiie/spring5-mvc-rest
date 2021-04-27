@@ -10,4 +10,6 @@ import org.mapstruct.Mapping;
 public interface CustomerMapper {
 
     CustomerDTO customerToCustomerDTO(Customer customer);
+
+    Customer customerDTOToCustomer(CustomerDTO customerDTO);
 }
