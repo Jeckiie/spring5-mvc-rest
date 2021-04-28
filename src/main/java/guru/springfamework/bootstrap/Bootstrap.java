@@ -2,8 +2,10 @@ package guru.springfamework.bootstrap;
 
 import guru.springfamework.domain.Category;
 import guru.springfamework.domain.Customer;
+import guru.springfamework.domain.Vendor;
 import guru.springfamework.repositories.CategoryRepository;
 import guru.springfamework.repositories.CustomerRepository;
+import guru.springfamework.repositories.VendorRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -12,10 +14,12 @@ public class Bootstrap implements CommandLineRunner {
 
     private final CategoryRepository categoryRepository;
     private final CustomerRepository customerRepository;
+    private final VendorRepository vendorRepository;
 
-    public Bootstrap(CategoryRepository categoryRepository, CustomerRepository customerRepository) {
+    public Bootstrap(CategoryRepository categoryRepository, CustomerRepository customerRepository, VendorRepository vendorRepository) {
         this.categoryRepository = categoryRepository;
         this.customerRepository = customerRepository;
+        this.vendorRepository = vendorRepository;
     }
 
     @Override
@@ -23,6 +27,8 @@ public class Bootstrap implements CommandLineRunner {
 
         loadCategories();
         loadCustomers();
+        loadVendors();
+
     }
 
     private void loadCategories() {
@@ -63,6 +69,20 @@ public class Bootstrap implements CommandLineRunner {
         customerRepository.save(joe);
         customerRepository.save(michael);
 
-        System.out.println("Customers Loaded = " + categoryRepository.count());
+        System.out.println("Customers Loaded = " + customerRepository.count());
+    }
+
+    private void loadVendors() {
+
+        Vendor joe = new Vendor();
+        joe.setName("Joe");
+
+        Vendor michael = new Vendor();
+        michael.setName("Michael");
+
+        vendorRepository.save(joe);
+        vendorRepository.save(michael);
+
+        System.out.println("Vendors Loaded = " + vendorRepository.count());
     }
 }
